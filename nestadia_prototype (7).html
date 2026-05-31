@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Nestadia — Property Trust Platform (Prototype)</title>
+<style>html,body,#root{margin:0;height:100%}body{background:#F4F1E9;-webkit-text-size-adjust:100%}
+#boot{font-family:-apple-system,system-ui,sans-serif;padding:48px;color:#5A5F55;font-size:15px;line-height:1.5}</style>
+</head>
+<body>
+<div id="root"><div id="boot">Loading Nestadia…</div></div>
+<script>
+const LOGO = "data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAB5AZEDASIAAhEBAxEB/8QAHQABAQEBAQEBAQEBAAAAAAAAAAgFBwYEAwIJAf/EAEUQAAEDAwICCAEJBwEGBwAAAAEAAgMEBQYHERIhCBMWMUFVlNF0FCI2OFFhhLKzFTI3QlJxobEjJDVic5EzVHKBk7TB/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAEEAgMF/8QAKBEBAAICAgEDAwQDAAAAAAAAAAERAgMUYTESIUEEE3EiIzJRscHw/9oADAMBAAIRAxEAPwDl2WZDf2ZTdmMvlza1tdMABVvAA4z96zO0eQ+fXT1cnumX/Sy8fHT/AKjllrh8OZm2p2jyHz66erk907R5D59dPVye6y0RLlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlqdo8h8+unq5PdO0eQ+fXT1cnustELlWv7RuH/nqr/5Xe6L5UVb7TRl/wBLLx8dP+o5Za1Mv+ll4+On/UcstRgnyIiIgiIgIi/aipamtq4aOjp5aipmeI4oomFz3uJ2AAHMk/Yg/FFqZNjt8xm4C33+1VdtqiwSNjqIy0uae4j7R38x9hWWhMV5EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBVaIir6CaMv+ll4+On/UcstamX/Sy8fHT/AKjllqME+REREUj0ctF8NzHT1+S5K+tllkqZI2tjn6qOJjNuZ2G5O+5JJ222Xs8j6PemE+H3O4WGesE0NNLJBURV3XMD2NJAI5gjccx3/wBl+3Rn+rTX/jvylf30X4pajo4VkELHSSyOrWMY0blzi3YALp9LXhh6cYrzCOKGlqa6shoqKnlqKmd4jiijaXOe4nYAAd5JVi6K6X2LSTGZs3zeemju7IS+WWQhzKBhH7jP6pDvsSOZJ4W+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";
+const CSS = `
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+.nest *{box-sizing:border-box;margin:0;padding:0}
+.nest{
+  --paper:#F4F1E9; --card:#FCFBF6; --ink:#191C18; --soft:#5A5F55; --line:#DED7C7;
+  --forest:#1C4A37; --forest2:#2E6B4F; --gold:#B5862E; --goldbg:#F3E9CE; --clay:#A6432E;
+  --ledger:#15171C; --ledgerline:#2A2E36;
+  font-family:'Hanken Grotesk',sans-serif; color:var(--ink); font-size:14px; line-height:1.45;
+  background:radial-gradient(circle at 12% 0%, #fbf8ef 0%, transparent 45%),radial-gradient(circle at 100% 100%, #eef0e6 0%, transparent 40%), var(--paper);
+  min-height:100%;
+}
+.nest b{font-weight:700}
+.bar{display:flex;align-items:center;gap:16px;padding:12px 22px;border-bottom:1px solid var(--line);background:rgba(252,251,246,.7);backdrop-filter:blur(6px)}
+.lockup{display:flex;align-items:center;gap:9px;background:var(--forest);border-radius:9px;padding:7px 13px 7px 10px}
+.mark{width:23px;height:23px;flex:none}
+.word{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#fff;letter-spacing:.2px}
+.tag{font-size:12px;color:var(--soft);letter-spacing:.3px}
+.profilechip{margin-left:auto;font-size:12px;color:var(--soft);font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;gap:7px}
+.profilechip b{color:var(--ink)} .muted2{opacity:.55}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.dot.ok{background:var(--forest2)}
+.reset{display:flex;align-items:center;gap:5px;font-family:inherit;font-size:12px;color:var(--soft);background:none;border:1px solid var(--line);border-radius:7px;padding:6px 10px;cursor:pointer}
+.reset:hover{color:var(--ink);border-color:var(--soft)}
+
+.coach{display:flex;align-items:center;gap:14px;padding:10px 22px;background:var(--forest);color:#EAF2EC}
+.coachbtn{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-family:inherit;font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.18s}
+.coachbtn:hover{background:rgba(255,255,255,.16)}.coachbtn.done{cursor:default;background:rgba(255,255,255,.1)}
+.coachlabel{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.7}.coachtext{opacity:.92}.go{opacity:.7}
+.simnote{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:11px;font-family:'IBM Plex Mono',monospace;opacity:.65}
+
+.tabs{display:flex;gap:4px;padding:12px 18px 0;border-bottom:1px solid var(--line);background:rgba(252,251,246,.5)}
+.tab{position:relative;display:flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;background:none;font-family:inherit;color:var(--soft);cursor:pointer;transition:.15s}
+.tab:hover{color:var(--ink)}
+.tab.active{background:var(--card);border-color:var(--line);color:var(--ink);box-shadow:0 -2px 0 var(--gold) inset}
+.tl{display:flex;flex-direction:column;line-height:1.15;text-align:left;font-weight:600;font-size:13px}
+.tl em{font-style:normal;font-weight:400;font-size:10.5px;color:var(--soft)}
+.ping{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--gold);animation:ping 1.6s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(181,134,46,.5)}70%{box-shadow:0 0 0 7px rgba(181,134,46,0)}100%{box-shadow:0 0 0 0 rgba(181,134,46,0)}}
+
+.body{display:grid;grid-template-columns:1fr 360px}
+.stage{padding:26px 24px;min-height:560px}
+.view{max-width:680px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.vtitle{font-family:'Fraunces',serif;font-size:24px;font-weight:600;margin-bottom:8px}
+.vlede{color:var(--soft);margin-bottom:18px;max-width:600px}.vlede.small{font-size:13px;margin-bottom:14px}.vlede em{font-style:italic;color:var(--ink)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 0 rgba(0,0,0,.02),0 8px 24px -18px rgba(28,74,55,.25)}
+.cardtop{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.ctitle{font-family:'Fraunces',serif;font-size:18px;font-weight:600}
+.ctitle.small{font-size:13px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--soft);margin-bottom:12px}
+.csub{color:var(--soft);font-size:13px;margin-top:2px}
+
+.badges{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:20px;border:1px solid}
+.badge.greda{background:var(--goldbg);border-color:#E2CF94;color:#7A5A14}
+.badge.verified{background:#E1EFE6;border-color:#B6D6C2;color:var(--forest)}
+.badge.submitted{background:#F1EEE6;border-color:var(--line);color:var(--soft)}
+
+.docgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.docchip{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--soft);background:#F6F3EB;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.claimtag{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--gold)}
+
+.primary{display:inline-flex;align-items:center;gap:8px;background:var(--forest);color:#fff;font-family:inherit;font-weight:600;font-size:14px;border:none;border-radius:10px;padding:12px 18px;cursor:pointer;transition:.18s}
+.primary:hover:not(:disabled){background:var(--forest2)}.primary:disabled{opacity:.7;cursor:default}
+.primary.sm{padding:9px 14px;font-size:13px;margin-top:10px}
+.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.notice{display:flex;align-items:center;gap:9px;font-size:13px;padding:11px 13px;border-radius:9px}
+.notice.ok{background:#E6F0E9;color:var(--forest);border:1px solid #C3DCCB}
+
+.units{display:flex;flex-direction:column;gap:10px}
+.unit{display:flex;justify-content:space-between;align-items:center;gap:14px;border:1px solid var(--line);border-radius:11px;padding:14px 16px;background:#fff;transition:.15s}
+.unit:hover{border-color:var(--forest2);box-shadow:0 6px 18px -12px rgba(28,74,55,.4)}
+.utype{font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:3px}
+.uname{font-weight:600;font-size:15px}.ucomp{font-size:12px;color:var(--soft);margin-top:2px}
+.uright{text-align:right}.uprice{font-weight:700;font-size:15px}.uusd{font-size:12px;color:var(--soft)}
+.select{margin-top:7px;display:inline-flex;align-items:center;gap:5px;background:var(--ink);color:#fff;border:none;border-radius:8px;padding:7px 13px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.select:hover{background:var(--forest)}
+
+.trbar{position:relative;height:26px;background:#EFEAdf;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+.trfill{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--forest),var(--forest2));transition:width .6s cubic-bezier(.4,0,.2,1)}
+.trlabel{position:absolute;right:10px;top:0;line-height:26px;font-size:11.5px;font-family:'IBM Plex Mono',monospace;color:var(--ink);mix-blend-mode:multiply}
+
+.timeline{list-style:none;position:relative;padding-left:6px}
+.timeline:before{content:"";position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.timeline li{position:relative;display:flex;gap:14px;padding:9px 0}
+.node{position:relative;z-index:1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#EDE8DC;color:var(--soft);flex:none;border:2px solid var(--paper)}
+.tl-done .node{background:var(--forest);color:#fff}.tl-active .node{background:var(--gold);color:#fff}
+.pulse{width:9px;height:9px;border-radius:50%;background:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{transform:scale(.7);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+.tlbody{flex:1}.tlhead{display:flex;justify-content:space-between;align-items:baseline}
+.tlpct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--soft)}
+.tlmile{font-size:12.5px;color:var(--soft)}
+.tldate{font-size:11.5px;color:var(--forest);font-family:'IBM Plex Mono',monospace;margin-top:2px}
+.tlnow{font-size:11.5px;color:var(--gold);font-weight:600;margin-top:4px}
+.tl-todo{opacity:.6}
+
+/* matter / prongs */
+.matter .prong{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}
+.matter .prong:last-child{border-bottom:none;padding-bottom:2px}
+.pnode{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none;background:#EDE8DC;color:var(--soft)}
+.s-done .pnode{background:var(--forest);color:#fff}.s-active .pnode{background:var(--gold);color:#fff}.s-waiting .pnode{background:#E4DECF;color:var(--soft)}
+.pbody{flex:1}
+.phead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pchip{font-size:10.5px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:11px}
+.pchip.done{background:#E1EFE6;color:var(--forest)}.pchip.active{background:var(--goldbg);color:#7A5A14}.pchip.waiting{background:#EFEAdf;color:var(--soft)}.pchip.locked{background:#EFEAdf;color:#A49C88}
+.psteps{list-style:none;margin:7px 0 0;display:flex;flex-direction:column;gap:4px}
+.psteps li{font-size:12.5px;color:var(--soft);padding-left:14px;position:relative}
+.psteps li:before{content:"";position:absolute;left:2px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--line)}
+.s-done .psteps li:before{background:var(--forest2)}
+.s-locked{opacity:.55}
+.pwait{margin-top:8px;font-size:12px;color:var(--gold);font-weight:600}
+
+.evidence{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;background:#F6F3EB;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:14px;color:var(--soft)}
+.sigmini{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold)}
+.attrow{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:7px;font-family:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
+.attrow:hover{border-color:var(--forest2)}.okico{color:var(--forest2)}
+.attsig{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--soft)}
+.viewp{margin-left:auto;display:flex;align-items:center;gap:3px;font-size:11.5px;color:var(--gold)}
+
+.bankstats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.bstat{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.bstat svg{color:var(--forest2)}.bstat em{font-style:normal;font-size:11.5px;color:var(--soft);display:block}.bstat b{font-size:17px}
+.sigrows{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sigrow{display:flex;align-items:center;gap:10px;font-size:13px;background:#F6F3EB;border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.sigval{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--soft)}
+
+.capgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.cap{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--soft);background:#F6F3EB;border:1px dashed var(--line);border-radius:9px;padding:11px 12px}
+.facts{background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:16px}
+.facts span{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--soft)}.facts b{display:block;margin-top:2px}
+
+.empty{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:var(--soft);padding:70px 20px;background:var(--card);border:1px dashed var(--line);border-radius:14px}
+.empty svg{color:#C8C0AD}
+
+.ledger{position:sticky;top:0;align-self:start;height:100vh;min-height:560px;background:var(--ledger);color:#D7DBE2;display:flex;flex-direction:column}
+.lhead{display:flex;align-items:center;gap:8px;padding:15px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.4px;border-bottom:1px solid var(--ledgerline);color:#9AA1AE}
+.lcount{margin-left:auto;background:#262B33;color:#fff;border-radius:11px;padding:1px 9px;font-size:11px}
+.levents{flex:1;overflow:auto;padding:12px}
+.lempty{color:#6A7180;font-size:12.5px;padding:24px 8px;text-align:center;font-family:'IBM Plex Mono',monospace}
+.levent{border-left:2px solid #3A4150;padding:8px 0 11px 12px;margin-bottom:9px;animation:slidein .3s ease}
+@keyframes slidein{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:none}}
+.levent.a-lawfirm{border-color:#F0997B}.levent.a-bank{border-color:#85B7EB}.levent.a-platform{border-color:#AFA9EC}
+.levent.a-verifier{border-color:#EF9F27}.levent.a-buyer{border-color:#7FD1AE}.levent.a-developer{border-color:#C8C0AD}
+.lrow1{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.lseq{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#6A7180}
+.ltype{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#EDEFF3;font-weight:500}
+.ldetail{font-size:12px;color:#AEB4BF;line-height:1.4}
+.lmeta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.lactor{font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-family:'IBM Plex Mono',monospace;color:#8089F2}
+.a-bank .lactor{color:#85B7EB}.a-lawfirm .lactor{color:#F0997B}.a-verifier .lactor{color:#EF9F27}.a-buyer .lactor{color:#7FD1AE}.a-developer .lactor{color:#B7AE97}
+.lgate{font-size:10px;background:#262B33;border-radius:5px;padding:1px 6px;font-family:'IBM Plex Mono',monospace;color:#C2C7D0}
+.lhash{margin-left:auto;font-size:10px;font-family:'IBM Plex Mono',monospace;color:#5E6573}
+
+.modalwrap{position:fixed;inset:0;background:rgba(20,22,26,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:20px;animation:fade .2s}
+.modal{background:var(--ledger);color:#D7DBE2;border-radius:14px;max-width:520px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.mhead{display:flex;align-items:center;gap:8px;padding:14px 18px;font-family:'IBM Plex Mono',monospace;font-size:13px;border-bottom:1px solid var(--ledgerline);color:#cdd2da}
+.mx{margin-left:auto;background:none;border:none;color:#8089a0;font-size:22px;line-height:1;cursor:pointer}
+.payload{padding:16px 18px;overflow:auto;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#9FE6C3;line-height:1.5}
+.mfoot{padding:11px 18px;border-top:1px solid var(--ledgerline);font-size:11px;color:#6A7180;font-family:'IBM Plex Mono',monospace}
+
+@media(max-width:880px){.body{grid-template-columns:1fr}.ledger{position:relative;height:auto;max-height:420px}}
+
+.logo-img{height:38px;width:auto;display:block;border-radius:7px}
+.listings{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.listing{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff;transition:.16s;display:flex;flex-direction:column}
+.listing:hover{border-color:var(--forest2);box-shadow:0 12px 28px -16px rgba(28,74,55,.45);transform:translateY(-2px)}
+.photo{position:relative;height:150px;overflow:hidden}
+.usvg{width:100%;height:100%;display:block}
+.ptype{position:absolute;top:10px;left:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;background:rgba(28,74,55,.92);color:#fff;padding:3px 8px;border-radius:20px}
+.pimpression{position:absolute;top:10px;right:10px;font-size:10px;background:rgba(252,251,246,.92);color:var(--soft);padding:3px 8px;border-radius:20px}
+.ploc{position:absolute;bottom:10px;left:10px;display:flex;align-items:center;gap:4px;font-size:11px;color:#fff;background:rgba(25,28,24,.45);padding:3px 9px;border-radius:20px}
+.ploc svg{stroke:#fff}
+.lbody{padding:14px 15px;display:flex;flex-direction:column;gap:4px;flex:1}
+.lname{font-weight:600;font-size:15px}
+.lfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px}
+.dealhero{height:152px;border-radius:11px;overflow:hidden;margin-bottom:16px}
+@media(max-width:560px){.listings{grid-template-columns:1fr}}
+
+/* ── mode toggle ── */
+.modebar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 22px;border-bottom:1px solid var(--line);background:rgba(252,251,246,.55)}
+.seg{display:inline-flex;background:#EFEAdf;border:1px solid var(--line);border-radius:11px;padding:3px}
+.segbtn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:13px;font-weight:600;color:var(--soft);background:none;border:none;border-radius:8px;padding:7px 13px;cursor:pointer;transition:.15s;white-space:nowrap}
+.segbtn.on{background:var(--forest);color:#fff;box-shadow:0 1px 4px -1px rgba(28,74,55,.5)}
+.segbtn:not(.on):hover{color:var(--ink)}
+.modehint{font-size:12px;color:var(--soft)}
+
+/* ── one-pager ── */
+.onepager{max-width:940px;margin:0 auto;padding:30px 24px 64px;animation:fade .3s ease}
+.op-kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--gold);margin-bottom:9px}
+.op-title{font-family:'Fraunces',serif;font-size:clamp(25px,4.4vw,34px);font-weight:600;line-height:1.08;margin-bottom:12px}
+.op-sub{color:var(--soft);font-size:clamp(14px,2.3vw,16px);max-width:700px;line-height:1.58}
+.op-scenario{margin-top:18px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--forest);border-radius:12px;padding:13px 16px;font-size:13.5px;line-height:1.5}
+.op-scenario span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--soft);margin-bottom:5px}
+.op-scenario em{font-style:normal;color:var(--soft)}
+.op-h{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin:34px 0 16px;display:flex;align-items:center;gap:11px}
+.ophn{width:26px;height:26px;flex:none;border-radius:8px;background:var(--forest);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600}
+.op-note{color:var(--soft);font-size:13px;line-height:1.55;max-width:700px;margin:-6px 0 14px}
+
+.opflow{list-style:none;position:relative;padding-left:0}
+.opflow:before{content:"";position:absolute;left:18px;top:18px;bottom:18px;width:2px;background:var(--line)}
+.opstep{position:relative;display:flex;gap:15px;padding:9px 0}
+.opdot{position:relative;z-index:1;width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;background:#EDE8DC;color:var(--soft);border:2px solid var(--paper)}
+.opstep.is-step .opdot{background:var(--forest);color:#fff}
+.opstep.is-fail .opdot{background:var(--clay);color:#fff}
+.opstep.is-cure .opdot{background:var(--gold);color:#fff}
+.opsbody{flex:1;padding-top:3px;min-width:0}
+.opshead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opshead b{font-size:15.5px}
+.optag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.7px;padding:2px 8px;border-radius:11px;background:#EFEAdf;color:var(--soft)}
+.optag.fail{background:#F3E0D9;color:var(--clay)}
+.optag.cure{background:var(--goldbg);color:#7A5A14}
+.optext{color:var(--soft);font-size:13.5px;margin-top:4px;line-height:1.52;max-width:660px}
+
+.opfork{margin:16px 0 14px;padding-left:2px}
+.opforkq{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);background:#EFEAdf;border:1px solid var(--line);border-radius:9px;padding:8px 13px}
+.opout{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.opcard{border-radius:13px;padding:16px 18px;border:1px solid}
+.opcard.good{background:#E8F1EA;border-color:#BFD9C9}
+.opcard.bad{background:#F6E8E2;border-color:#E6C7B9}
+.opcard h4{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:700;margin-bottom:7px}
+.opcard.good h4{color:var(--forest)}.opcard.good h4 svg{color:var(--forest2)}
+.opcard.bad h4{color:var(--clay)}.opcard.bad h4 svg{color:var(--clay)}
+.opcard p{font-size:13px;color:var(--soft);line-height:1.52}
+
+.opguard{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:17px 18px;box-shadow:0 8px 24px -20px rgba(28,74,55,.3)}
+.gi{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--goldbg);color:#7A5A14;margin-bottom:11px}
+.gcard h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.gcard p{font-size:12.8px;color:var(--soft);line-height:1.5}
+
+.opledger{background:var(--ledger);border-radius:14px;padding:14px 16px;border:1px solid var(--ledgerline)}
+.opl-fork{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px;padding-top:12px;border-top:1px dashed var(--ledgerline)}
+.opcol{min-width:0}
+.opcolhead{display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--ledgerline)}
+.opcolhead.good,.opcolhead.good svg{color:#7FD1AE}
+.opcolhead.bad,.opcolhead.bad svg{color:#EA8A66}
+.opledger .levent{margin-bottom:8px}
+.opledger .levent:last-child{margin-bottom:0}
+.levent.fail,.levent.abort{border-color:#E0683F}
+.failtag{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.6px;background:#E0683F;color:#fff;border-radius:5px;padding:1px 6px;margin-left:auto}
+
+.opalso{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.opalso .a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;font-size:13px;color:var(--soft);line-height:1.52}
+.opalso .a b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:5px}
+.op-foot{margin-top:26px;display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--soft);opacity:.85}
+
+/* ── responsive ── */
+@media(max-width:780px){
+  .opguard{grid-template-columns:1fr}
+  .opout{grid-template-columns:1fr}
+  .opalso{grid-template-columns:1fr}
+  .opl-fork{grid-template-columns:1fr;gap:14px}
+}
+@media(max-width:620px){
+  .bar{flex-wrap:wrap;gap:10px 14px;padding:12px 16px}
+  .profilechip{order:4;margin-left:0;flex-basis:100%}
+  .profilechip .muted2{display:none}
+  .reset{margin-left:auto}
+  .modebar{padding:10px 16px}
+  .modehint{flex-basis:100%}
+  .coach{flex-wrap:wrap;padding:10px 16px}
+  .simnote{margin-left:0}
+  .tabs{padding:10px 12px 0;overflow-x:auto;flex-wrap:nowrap}
+  .tab{flex:0 0 auto}
+  .tl em{display:none}
+  .stage{padding:20px 16px}
+  .onepager{padding:24px 16px 52px}
+}
+`;
+
+/* ───────────── simulated crypto (clearly fake) ───────────── */
+function simHash(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+  let a = (h >>> 0).toString(16).padStart(8, "0");
+  let h2 = 0x12345678 ^ h;
+  for (let i = str.length - 1; i >= 0; i--) { h2 ^= str.charCodeAt(i); h2 = Math.imul(h2, 0x01000193); }
+  let b = (h2 >>> 0).toString(16).padStart(8, "0");
+  return "sha256:" + a + b;
+}
+function simSig(payload, keyId) {
+  let s = simHash(JSON.stringify(payload) + keyId).slice(7);
+  while (s.length < 64) s += simHash(s).slice(7);
+  return s.slice(0, 64);
+}
+const nonce = () => simHash(Math.random() + "" + Date.now()).slice(7, 23);
+
+/* ───────────── Ghana profile (only country-specific facts) ───────────── */
+const FX = 13.3;
+const PROFILE = {
+  profile_id: "GH", city: "Accra", currency: "GHS", tenure_cap: 50,
+  registry: "Lands Commission", registry_url: "onlineservices.lc.gov.gh",
+  tranches: [10, 20, 30, 30, 10],
+  lawyer: { name: "Ankrah & Partners, Accra", key_id: "GH-LF-key-7c2a", lawyer: "A. Mensah" },
+  bank: { name: "Fidelity Bank Ghana", key_id: "GH-BANK-key-19b4" },
+  verifier: { name: "K. Boateng", id: "FV-0231", key_id: "GH-FV-key-44e1" },
+};
+const gatesFor = (type) => type === "off_plan" ? [
+  { id: "G1", label: "Reservation & Escrow", milestone: "SPA signed · escrow funded", actor: "buyer", days: 0 },
+  { id: "G2", label: "Foundation Complete", milestone: "Substructure verified on site", actor: "verifier", days: 95 },
+  { id: "G3", label: "Superstructure to Roof", milestone: "Frame to roof level verified", actor: "verifier", days: 210 },
+  { id: "G4", label: "Finishes & Completion", milestone: "Completion certificate · snagging cleared", actor: "verifier", days: 340 },
+  { id: "G5", label: "Handover & Registration", milestone: "Sub-lease registered · stamp duty paid", actor: "lawfirm", days: 380 },
+] : [
+  { id: "G1", label: "Reservation & Escrow", milestone: "SPA signed · escrow funded", actor: "buyer", days: 0 },
+  { id: "G2", label: "Title Re-confirmed", milestone: "Fresh Lands Commission search clean", actor: "lawfirm", days: 6 },
+  { id: "G3", label: "Conveyance Lodged", milestone: "Assignment executed & lodged", actor: "lawfirm", days: 18 },
+  { id: "G4", label: "Stamp Duty & Handover", milestone: "Stamp duty paid · vacant possession", actor: "lawfirm", days: 34 },
+  { id: "G5", label: "Registration Complete", milestone: "Title registered in buyer's name", actor: "lawfirm", days: 70 },
+];
+
+const DEV = { name: "Asanka Heights Ltd", greda: "GH-GREDA-0421" };
+const DEVELOPMENT = "Cedar Court · Cantonments";
+const UNITS = [
+  { id: "A2", type: "completed", beds: "2-bed", area: 96, ghs: 2160000 },
+  { id: "B4", type: "off_plan", beds: "2-bed", area: 102, ghs: 2400000, completion: "Q2 2027" },
+];
+const ROLES = [
+  { id: "buyer", label: "Buyer", sub: "Diaspora", icon: "Users" },
+  { id: "developer", label: "Developer", sub: DEV.name, icon: "Building2" },
+  { id: "lawfirm", label: "Law Firm", sub: "Designated verifier", icon: "Scale" },
+  { id: "bank", label: "Bank", sub: "Escrow custodian", icon: "Landmark" },
+  { id: "verifier", label: "Field Verifier", sub: "Evidentiary", icon: "HardHat" },
+];
+const ghs = (n) => "GHS " + n.toLocaleString();
+const usd = (n) => "≈ $" + Math.round(n / FX).toLocaleString();
+const fmt = (iso) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const labelFor = (s) => s === "awaiting_buyer" ? "buyer signature & escrow" : s === "awaiting_evidence" ? "field evidence" : s === "awaiting_attestation" ? "law-firm attestation" : "bank release";
+
+/* ───────────── icons (inline SVG, no dependencies) ───────────── */
+const ICONS = {
+  Building2: '<path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/><path d="M10 22v-3h4v3"/><path d="M3 22h18"/>',
+  Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  Scale: '<path d="M12 3v18M5 21h14M7 7h10"/><path d="M7 7 4 14h6L7 7ZM17 7l-3 7h6l-3-7Z"/>',
+  Landmark: '<path d="M3 22h18M5 10h14M12 4 5 10M12 4l7 6M6 10v9M10 10v9M14 10v9M18 10v9"/>',
+  HardHat: '<path d="M2 18h20v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2Z"/><path d="M4 16a8 8 0 0 1 16 0"/><path d="M10 9V5a2 2 0 0 1 4 0v4"/>',
+  ShieldCheck: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',
+  CheckCircle2: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  Lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  FileText: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  Fingerprint: '<path d="M5 9a8 8 0 0 1 14 4M12 6a6 6 0 0 1 6 6M12 10a2 2 0 0 1 2 2v2M12 14v3M8 12a4 4 0 0 1 1-2.6M7 17a8 8 0 0 0 1 2"/>',
+  Hash: '<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+  MapPin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  ArrowRight: '<path d="M5 12h14M13 5l7 7-7 7"/>',
+  Loader2: '<path d="M21 12a9 9 0 1 1-6.2-8.5"/>',
+  RotateCcw: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+  ChevronRight: '<path d="m9 6 6 6-6 6"/>',
+  BadgeCheck: '<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>',
+  Eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  Camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/>',
+  Coins: '<circle cx="8" cy="8" r="6"/><path d="M18.1 10.4A6 6 0 1 1 10.3 18M7 6h1v4M16.7 13.9l.7.7-2.8 2.8"/>',
+  PenLine: '<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+  Stamp: '<path d="M5 22h14"/><path d="M19 14H5v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2Z"/><path d="M9 14V9a3 3 0 1 1 6 0v5"/>',
+  FileSignature: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/><path d="M14 3v5h5"/><path d="M16 19h6M19 16a1.4 1.4 0 0 1 2 2l-3.5 3.5L16 22l.5-2.5Z"/>',
+  AlertTriangle: '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/>',
+};
+function icon(name, size = 16, cls = "") {
+  const inner = ICONS[name] || "";
+  return `<svg ${cls ? `class="${cls}" ` : ""}width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+}
+
+/* ───────────── apartment illustrations (inline, no external assets) ───────────── */
+function unitImage(id) {
+  let win = "";
+  if (id === "A2") {
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+      const x = 134 + c * 39, y = 72 + r * 34, gold = (r + c) % 3 === 0;
+      win += `<rect x="${x}" y="${y}" width="27" height="21" rx="2" fill="${gold ? "#F2D79A" : "#CFE3D6"}" opacity="${gold ? 0.95 : 0.55}"/>`;
+    }
+    return `<svg class="usvg" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7ECCF"/><stop offset="1" stop-color="#EAF0E7"/></linearGradient>
+        <linearGradient id="bldA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E6B4F"/><stop offset="1" stop-color="#1C4A37"/></linearGradient>
+      </defs>
+      <rect width="400" height="230" fill="url(#skyA)"/>
+      <circle cx="322" cy="54" r="34" fill="#F2D79A" opacity="0.7"/>
+      <rect x="38" y="80" width="118" height="120" rx="3" fill="#3A7A5C" opacity="0.5"/>
+      <rect x="120" y="56" width="172" height="152" rx="4" fill="url(#bldA)"/>
+      ${win}
+      <rect x="0" y="198" width="400" height="32" fill="#E3DAC5"/>
+      <rect x="58" y="176" width="5" height="26" fill="#6B5436"/>
+      <circle cx="60" cy="170" r="20" fill="#3A7A5C"/><circle cx="75" cy="179" r="13" fill="#2E6B4F"/>
+    </svg>`;
+  }
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 2; c++) {
+    const x = 166 + c * 48, y = 46 + r * 32, gold = (r * 2 + c) % 4 === 0;
+    win += `<rect x="${x}" y="${y}" width="34" height="21" rx="2" fill="${gold ? "#F2D79A" : "#CFE3D6"}" opacity="${gold ? 0.9 : 0.5}"/>`;
+  }
+  return `<svg class="usvg" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE6E6"/><stop offset="0.7" stop-color="#EFE7DA"/><stop offset="1" stop-color="#F4E7CD"/></linearGradient>
+      <linearGradient id="bldB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33715A"/><stop offset="1" stop-color="#1C4A37"/></linearGradient>
+    </defs>
+    <rect width="400" height="230" fill="url(#skyB)"/>
+    <circle cx="92" cy="60" r="30" fill="#F2D79A" opacity="0.5"/>
+    <rect x="150" y="32" width="112" height="176" rx="4" fill="url(#bldB)"/>
+    <rect x="264" y="96" width="70" height="112" rx="3" fill="#3A7A5C" opacity="0.6"/>
+    ${win}
+    <path d="M300 28 V118 M300 28 H352 M300 42 H344 M352 28 V40" stroke="#9A8C6E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="340" y="40" width="3" height="13" fill="#9A8C6E"/>
+    <rect x="0" y="198" width="400" height="32" fill="#DFDACD"/>
+  </svg>`;
+}
+
+/* ───────────── state ───────────── */
+const state = {
+  role: "developer", devState: "unlisted", deal: null, ledger: [],
+  busy: false, payloadOpen: null, view: "demo",
+  clock: new Date("2026-03-02T09:00:00Z"),
+};
+
+function tick(days = 0, mins = 8) {
+  state.clock = new Date(state.clock.getTime() + days * 864e5 + mins * 6e4);
+  return state.clock.toISOString();
+}
+function pushEvents(specs) {
+  for (const s of specs) {
+    const prevHash = state.ledger.length ? state.ledger[state.ledger.length - 1].hash : "sha256:GENESIS00000000";
+    const seq = state.ledger.length + 1;
+    const hash = simHash(prevHash + `${seq}|${s.type}|${s.actor}|${s.gate || ""}|${s.detail}`);
+    state.ledger.push(Object.assign({ seq, prevHash, hash }, s));
+  }
+}
+
+/* ───────────── derived ───────────── */
+const curUnit = () => state.deal && UNITS.find((u) => u.id === state.deal.unitId);
+const curGate = () => state.deal && state.deal.idx < state.deal.gates.length ? state.deal.gates[state.deal.idx] : null;
+const releasedPct = () => state.deal ? state.deal.gates.reduce((a, g, i) => a + (g.status === "released" ? PROFILE.tranches[i] : 0), 0) : 0;
+
+function prongStatus() {
+  const d = state.deal, gate = curGate();
+  const g1released = d && d.gates[0].status === "released";
+  const p1 = state.devState === "verified" ? "done" : "active";
+  let p2 = "locked";
+  if (state.devState === "verified") p2 = g1released ? "done" : (d && d.spaIssued ? "waiting" : "active");
+  let p3 = "locked";
+  if (d) {
+    const g5 = d.gates.find((g) => g.id === "G5");
+    p3 = g5.status === "released" ? "done" : (gate && gate.id === "G5" && gate.status === "awaiting_attestation") ? "active" : "locked";
+  }
+  return { p1, p2, p3 };
+}
+
+function nextStep() {
+  const d = state.deal, gate = curGate();
+  if (state.devState === "unlisted") return { role: "developer", text: "List the development on the platform" };
+  if (!d) return { role: "buyer", text: "Browse the listing and select a unit" };
+  if (state.devState === "submitted" || state.devState === "verifying") return { role: "lawfirm", text: "Prong 1 · Run project verification" };
+  if (state.devState === "verified" && !d.spaIssued) return { role: "lawfirm", text: "Prong 2 · Draft & issue the SPA" };
+  if (!gate) return null;
+  if (gate.status === "awaiting_buyer") return { role: "buyer", text: `Sign SPA & fund escrow (${gate.id})` };
+  if (gate.status === "awaiting_evidence") return { role: "verifier", text: `Submit site evidence (${gate.id})` };
+  if (gate.status === "awaiting_attestation")
+    return gate.id === "G5"
+      ? { role: "lawfirm", text: "Prong 3 · Execute deed, stamp duty & lodge" }
+      : { role: "lawfirm", text: `Attest ${gate.id} — ${gate.label}` };
+  if (gate.status === "awaiting_bank") return { role: "bank", text: `Verify signatures & release tranche (${gate.id})` };
+  return null;
+}
+
+/* ───────────── handlers ───────────── */
+function setRole(r) { state.role = r; render(); }
+function setView(v) { state.view = v; render(); }
+function reset() {
+  state.devState = "unlisted"; state.deal = null; state.ledger = []; state.busy = false;
+  state.role = "developer"; state.payloadOpen = null; state.clock = new Date("2026-03-02T09:00:00Z"); render();
+}
+function openPayload(gateId) {
+  const g = state.deal && state.deal.gates.find((x) => x.id === gateId);
+  if (g && g.attestation) { state.payloadOpen = g.attestation; render(); }
+}
+
+function listDevelopment() {
+  state.busy = true;
+  pushEvents([{ type: "developer_application", actor: "developer", detail: `${DEV.name} applies to list ${DEVELOPMENT}`, ts: tick() }]);
+  render();
+  setTimeout(() => {
+    pushEvents([
+      { type: "greda_membership_confirmed", actor: "platform", detail: `GREDA member ${DEV.greda} confirmed against register`, ts: tick() },
+      { type: "development_listed", actor: "platform", detail: `${UNITS.length} units live · state = developer_submitted`, ts: tick() },
+    ]);
+    state.devState = "submitted"; state.busy = false; render();
+  }, 1100);
+}
+
+function selectUnit(id) {
+  const u = UNITS.find((x) => x.id === id);
+  const gs = gatesFor(u.type).map((g, i) => Object.assign({}, g, { status: i === 0 ? "awaiting_buyer" : "locked", attestation: null, evidence: null, confirmation: null, at: null }));
+  state.deal = { unitId: u.id, type: u.type, gates: gs, idx: 0, spaIssued: false };
+  pushEvents([
+    { type: "buyer_selected_unit", actor: "buyer", detail: `Unit ${u.id} (${u.type}) selected · ${ghs(u.ghs)}`, ts: tick() },
+    { type: "project_verification_triggered", actor: "platform", detail: `First selection on ${DEVELOPMENT} → project verification queued`, ts: tick() },
+  ]);
+  state.role = "lawfirm"; render();
+}
+
+function runProjectVerification() {
+  state.busy = true; state.devState = "verifying";
+  pushEvents([{ type: "project_verification_started", actor: "lawfirm", detail: `Lands Commission search + permits for ${DEVELOPMENT}`, ts: tick() }]);
+  render();
+  setTimeout(() => {
+    pushEvents([
+      { type: "land_title_search", actor: "lawfirm", detail: `${PROFILE.registry} search clean · no caveats/overlaps`, ts: tick(2) },
+      { type: "permits_verified", actor: "lawfirm", detail: "MMDA building permit · LUSPA planning · EPA — all valid", ts: tick(1) },
+      { type: "developer_dd_complete", actor: "lawfirm", detail: "ORC extract · litigation clear · track record verified", ts: tick(1) },
+      { type: "project_verified", actor: "platform", detail: `${DEVELOPMENT} → state = title_permits_verified (reused for all units)`, ts: tick() },
+    ]);
+    state.devState = "verified"; state.busy = false; render();
+  }, 1500);
+}
+
+function draftSPA() {
+  state.busy = true;
+  const offplan = state.deal.type === "off_plan";
+  pushEvents([{ type: "spa_drafted", actor: "lawfirm", gate: "G1", detail: `Lawyer-drafted SPA · milestone payment schedule${offplan ? " + refund & delay-penalty clauses" : ""}`, ts: tick() }]);
+  render();
+  setTimeout(() => {
+    pushEvents([{ type: "spa_issued", actor: "lawfirm", gate: "G1", detail: "SPA issued to buyer for execution & witnessing", ts: tick() }]);
+    state.deal.spaIssued = true; state.busy = false; state.role = "buyer"; render();
+  }, 950);
+}
+
+function buyerFund() {
+  const u = curUnit();
+  curGate().status = "awaiting_attestation";
+  pushEvents([
+    { type: "spa_executed", actor: "buyer", gate: "G1", detail: "SPA executed by buyer (lawyer-witnessed)", ts: tick() },
+    { type: "escrow_funded", actor: "bank", gate: "G1", detail: `Buyer funds held in segregated escrow · ${ghs(u.ghs)}`, ts: tick() },
+  ]);
+  state.role = "lawfirm"; render();
+}
+
+function submitEvidence() {
+  state.busy = true;
+  const g = curGate();
+  pushEvents([{ type: "verifier_assignment_completed", actor: "verifier", gate: g.id, detail: "On-site visit · GPS + timestamped photos · selfie-at-site", ts: tick(g.days) }]);
+  render();
+  setTimeout(() => {
+    const facts = g.id === "G2" ? "substructure: complete" : g.id === "G3" ? "superstructure: roof level reached" : "finishes: complete · snagging cleared";
+    g.evidence = { schema: "evidence/field_verification/v1", verifier: PROFILE.verifier.id, gate: g.id, facts, photos: 4, sig: simSig({ g: g.id, v: PROFILE.verifier.id }, PROFILE.verifier.key_id) };
+    g.status = "awaiting_attestation";
+    pushEvents([{ type: "platform_field_evidence_submitted", actor: "verifier", gate: g.id, detail: `Signed evidence · ${facts}`, ts: tick() }]);
+    state.busy = false; state.role = "lawfirm"; render();
+  }, 1200);
+}
+
+function attest() {
+  state.busy = true;
+  const g = curGate(), isG5 = g.id === "G5";
+  pushEvents([{ type: "attestation_requested", actor: "platform", gate: g.id, detail: `Engine requests attestation for ${g.id}`, ts: tick() }]);
+  render();
+  setTimeout(() => {
+    if (isG5) {
+      pushEvents([
+        { type: "deed_executed", actor: "lawfirm", gate: "G5", detail: "Assignment / sub-lease (deed) executed — tenure within 50-yr ceiling", ts: tick(2) },
+        { type: "stamp_duty_paid", actor: "lawfirm", gate: "G5", detail: "Stamp duty assessed & paid (required before registration)", ts: tick(3) },
+        { type: "registry_lodgement", actor: "lawfirm", gate: "G5", detail: `Lodged at ${PROFILE.registry} for title registration`, ts: tick(5) },
+      ]);
+    }
+    const scope = [];
+    if (g.id === "G1") scope.push("executed_SPA", "buyer_KYC", "escrow_receipt");
+    if (g.evidence) scope.push("field_evidence_" + g.id);
+    if (state.deal.type === "completed" && g.id !== "G1" && !isG5) scope.push("registry_proof_" + g.id);
+    if (isG5) scope.push("registered_sublease", "stamp_duty_receipt");
+    const payload = {
+      schema_version: "attestation/v1", deal_id: "GH-DEAL-" + state.deal.unitId, profile: "GH",
+      gate_id: g.id, decision: "pass", artifact_set: scope.map((s) => ({ type: s, hash: simHash(s + g.id) })),
+      lawyer: PROFILE.lawyer.lawyer, key_id: PROFILE.lawyer.key_id, nonce: nonce(), signed_at: tick(),
+    };
+    payload.signature = simSig(payload, PROFILE.lawyer.key_id);
+    g.attestation = payload; g.status = "awaiting_bank";
+    pushEvents([
+      { type: "attestation_received", actor: "lawfirm", gate: g.id, detail: `Signed PASS · lawyer ${PROFILE.lawyer.lawyer} · ${scope.length} artifacts committed`, ts: tick() },
+      { type: "attestation_accepted", actor: "platform", gate: g.id, detail: "7/7 engine checks passed (sig · key · state · hashes · nonce · skew)", ts: tick() },
+    ]);
+    state.busy = false; state.role = "bank"; render();
+  }, 1300);
+}
+
+function bankRelease() {
+  state.busy = true;
+  const d = state.deal, u = curUnit(), g = curGate(), idx = d.idx;
+  const amt = Math.round(u.ghs * PROFILE.tranches[idx] / 100);
+  pushEvents([{ type: "bank_instruction_issued", actor: "platform", gate: g.id, detail: `Dual-signed release · ${PROFILE.tranches[idx]}% · ${ghs(amt)}`, ts: tick() }]);
+  render();
+  setTimeout(() => {
+    pushEvents([
+      { type: "bank_dual_signature_verified", actor: "bank", gate: g.id, detail: "Law-firm attestation + platform countersig verified independently", ts: tick() },
+      { type: "bank_confirmation", actor: "bank", gate: g.id, detail: `Payout executed · ${ghs(amt)} → seller · schedule check OK`, ts: tick() },
+    ]);
+    g.status = "released";
+    g.confirmation = { amt, ref: "FBG-" + nonce().slice(0, 8).toUpperCase() };
+    g.at = state.clock.toISOString();
+    const ni = d.idx + 1;
+    if (ni < d.gates.length) {
+      const ng = d.gates[ni];
+      ng.status = ng.id === "G1" ? "awaiting_buyer"
+        : (d.type === "off_plan" && ["G2", "G3", "G4"].includes(ng.id)) ? "awaiting_evidence" : "awaiting_attestation";
+    } else {
+      pushEvents([{ type: "deal_complete", actor: "platform", detail: "All gates released · title in buyer's name", ts: tick() }]);
+    }
+    d.idx = ni; state.busy = false; render();
+  }, 1300);
+}
+
+/* ───────────── view fragments ───────────── */
+const esc = (s) => String(s);
+function devBadge(devState) {
+  const verified = devState === "verified";
+  return `<div class="badges">
+    <span class="badge greda">${icon("BadgeCheck", 13)} GREDA-Verified Developer</span>
+    ${verified
+      ? `<span class="badge verified">${icon("ShieldCheck", 13)} Title &amp; Permits Verified</span>`
+      : `<span class="badge submitted">${icon("Eye", 13)} Documents submitted · not yet independently verified</span>`}
+  </div>`;
+}
+function emptyHTML(name, text) {
+  return `<div class="empty">${icon(name, 26)}<p>${text}</p></div>`;
+}
+function lrowHTML(e) {
+  return `<div class="levent a-${e.actor}${e.fail ? " fail" : ""}${e.abort ? " abort" : ""}">
+    <div class="lrow1"><span class="lseq">#${e.seq}</span><span class="ltype">${e.type}</span>${e.fail ? '<span class="failtag">FAIL</span>' : ""}${e.abort ? '<span class="failtag">ABORT</span>' : ""}</div>
+    <div class="ldetail">${e.detail}</div>
+    <div class="lmeta"><span class="lactor">${e.actor}</span>${e.gate ? `<span class="lgate">${e.gate}</span>` : ""}<span class="lhash">${e.hash.slice(0, 17)}…</span></div>
+  </div>`;
+}
+
+function developerHTML() {
+  const docs = ["Land title (developer's claim)", "Building permit", "Planning approval", "Approved drawings", "Unit schedule", "Off-plan milestone schedule"];
+  const tag = state.devState === "verified" ? "verified" : "submitted";
+  return `<div class="view">
+    <h2 class="vtitle">Developer console</h2>
+    <p class="vlede">List a development. Nestadia confirms GREDA membership against the register before anything goes live — the only thing <em>verified</em> at this stage. Uploaded documents show to buyers as <b>claims</b> until the law firm verifies them on first selection.</p>
+    <div class="card big">
+      <div class="cardtop">
+        <div><div class="ctitle">${DEVELOPMENT}</div><div class="csub">${DEV.name} · GREDA ${DEV.greda}</div></div>
+        ${state.devState !== "unlisted" ? devBadge(state.devState) : ""}
+      </div>
+      <div class="docgrid">
+        ${docs.map((d) => `<div class="docchip">${icon("FileText", 13)} ${d} <span class="claimtag">${tag}</span></div>`).join("")}
+      </div>
+      ${state.devState === "unlisted"
+      ? `<button class="primary" data-act="list" ${state.busy ? "disabled" : ""}>${state.busy ? `${icon("Loader2", 15, "spin")} Confirming GREDA…` : "Apply to list — confirm GREDA &amp; go live"}</button>`
+      : `<div class="notice ok">${icon("CheckCircle2", 15)} Live with ${UNITS.length} units. GREDA confirmed. Project verification deferred until a buyer selects a unit.</div>`}
+    </div>
+  </div>`;
+}
+
+function buyerHTML() {
+  if (state.devState === "unlisted") return `<div class="view">${emptyHTML("Users", "Nothing listed yet. Switch to the Developer to list Cedar Court.")}</div>`;
+  const d = state.deal, u = curUnit(), pct = releasedPct();
+  if (!d) {
+    return `<div class="view">
+      <h2 class="vtitle">Browse listing</h2>
+      <p class="vlede">Notice the badge wording. This developer is GREDA-verified, but the property's title is <b>not</b> independently verified yet — selecting a unit triggers that verification, and no money moves until it passes.</p>
+      <div class="card">
+        <div class="cardtop"><div><div class="ctitle">${DEVELOPMENT}</div><div class="csub">${DEV.name}</div></div>${devBadge(state.devState)}</div>
+        <div class="listings">
+          ${UNITS.map((unit) => `<div class="listing">
+            <div class="photo">
+              ${unitImage(unit.id)}
+              <span class="ptype">${unit.type === "off_plan" ? "Off-plan" : "Completed"}</span>
+              ${unit.type === "off_plan" ? `<span class="pimpression">Artist's impression</span>` : ""}
+              <span class="ploc">${icon("MapPin", 11)} Cantonments, Accra</span>
+            </div>
+            <div class="lbody">
+              <div class="lname">Unit ${unit.id} · ${unit.beds} · ${unit.area} m²</div>
+              ${unit.completion ? `<div class="ucomp">Completion ${unit.completion}</div>` : ""}
+              <div class="lfoot">
+                <div><div class="uprice">${ghs(unit.ghs)}</div><div class="uusd">${usd(unit.ghs)}</div></div>
+                <button class="select" data-act="select" data-arg="${unit.id}">Select ${icon("ArrowRight", 13)}</button>
+              </div>
+            </div>
+          </div>`).join("")}
+        </div>
+      </div>
+    </div>`;
+  }
+  const timeline = d.gates.map((g, i) => {
+    const st = g.status === "released" ? "done" : (i === d.idx ? "active" : "todo");
+    const canFund = st === "active" && g.status === "awaiting_buyer";
+    const nodeInner = st === "done" ? icon("CheckCircle2", 15) : st === "active" ? `<span class="pulse"></span>` : icon("Lock", 12);
+    return `<li class="tl-${st}">
+      <span class="node">${nodeInner}</span>
+      <div class="tlbody">
+        <div class="tlhead"><b>${g.id} · ${g.label}</b><span class="tlpct">${PROFILE.tranches[i]}%</span></div>
+        <div class="tlmile">${g.milestone}</div>
+        ${g.at ? `<div class="tldate">released ${fmt(g.at)} · ${ghs(g.confirmation.amt)}</div>` : ""}
+        ${canFund ? (d.spaIssued
+        ? `<button class="primary sm" data-act="fund">${icon("FileSignature", 14)} Sign SPA &amp; fund escrow</button>`
+        : `<div class="tlnow">awaiting SPA from the law firm</div>`) : ""}
+        ${st === "active" && g.status !== "awaiting_buyer" ? `<div class="tlnow">awaiting ${labelFor(g.status)}</div>` : ""}
+      </div>
+    </li>`;
+  }).join("");
+  return `<div class="view">
+    <h2 class="vtitle">Your purchase — M5 timeline</h2>
+    <div class="card">
+      <div class="dealhero">${unitImage(u.id)}</div>
+      <div class="cardtop">
+        <div><div class="ctitle">Unit ${u.id} · ${u.beds}</div><div class="csub">${DEVELOPMENT} · ${d.type === "off_plan" ? "Off-plan" : "Completed"} · ${ghs(u.ghs)} ${usd(u.ghs)}</div></div>
+        <span class="badge ${pct > 0 ? "verified" : "submitted"}">${pct > 0 ? `${icon("ShieldCheck", 13)} Cleared for your purchase` : `${icon("Loader2", 13, "spin")} In verification`}</span>
+      </div>
+      <div class="trbar"><div class="trfill" style="width:${pct}%"></div><span class="trlabel">${pct}% released to seller</span></div>
+      <ol class="timeline">${timeline}</ol>
+    </div>
+  </div>`;
+}
+
+function lawfirmHTML() {
+  const d = state.deal;
+  if (!d) return `<div class="view">${emptyHTML("Scale", "No active matter. The law firm acts once a buyer selects a unit.")}</div>`;
+  const gate = curGate(), prongs = prongStatus(), step = nextStep();
+  const live = step && step.role === "lawfirm";
+  const liveText = live ? step.text : "";
+  const offplan = d.type === "off_plan";
+  const P = [
+    { key: "p1", n: 1, ic: "ShieldCheck", title: "Verification", status: prongs.p1,
+      steps: ["Lands Commission search", "MMDA / LUSPA / EPA permits", "Developer due diligence"],
+      action: prongs.p1 === "active" && live && liveText.indexOf("Prong 1") >= 0 ? { label: state.busy ? "Searching registry & permits…" : "Run project verification", act: "verify" } : null },
+    { key: "p2", n: 2, ic: "PenLine", title: "Sale & Purchase Agreement", status: prongs.p2,
+      steps: ["Draft lawyer-led SPA", offplan ? "Milestone payment + refund / delay-penalty clauses" : "Milestone payment schedule", "Buyer execution & witnessing"],
+      action: prongs.p2 === "active" && live && liveText.indexOf("Prong 2") >= 0 ? { label: state.busy ? "Issuing SPA…" : "Draft & issue SPA", act: "spa" } : null,
+      waiting: prongs.p2 === "waiting" ? "Issued — awaiting buyer execution at G1" : null },
+    { key: "p3", n: 3, ic: "Stamp", title: "Registration & Deed", status: prongs.p3,
+      steps: ["Execute assignment / sub-lease (deed)", "Stamp duty assessment & payment", `Lodge at ${PROFILE.registry}`, "Registration in buyer's name"],
+      action: prongs.p3 === "active" && live && liveText.indexOf("Prong 3") >= 0 ? { label: state.busy ? "Executing deed & lodging…" : "Execute deed, stamp duty & lodge", act: "attest" } : null },
+  ];
+  const chipLabel = (s) => s === "done" ? "complete" : s === "active" ? "in progress" : s === "waiting" ? "awaiting buyer" : "upcoming";
+  const prongsHTML = P.map((p) => `<div class="prong s-${p.status}">
+    <span class="pnode">${icon(p.ic, 15)}</span>
+    <div class="pbody">
+      <div class="phead"><b>Prong ${p.n} · ${p.title}</b><span class="pchip ${p.status}">${chipLabel(p.status)}</span></div>
+      <ul class="psteps">${p.steps.map((s) => `<li>${s}</li>`).join("")}</ul>
+      ${p.waiting ? `<div class="pwait">${p.waiting}</div>` : ""}
+      ${p.action ? `<button class="primary sm" data-act="${p.action.act}" ${state.busy ? "disabled" : ""}>${state.busy ? icon("Loader2", 14, "spin") : icon(p.ic, 14)} ${p.action.label}</button>` : ""}
+    </div>
+  </div>`).join("");
+
+  const showAttest = gate && gate.status === "awaiting_attestation" && gate.id !== "G5";
+  const attestCard = showAttest ? `<div class="card">
+    <div class="ctitle">Gate attestation · ${gate.id} — ${gate.label}</div>
+    <p class="vlede small">Binary pass/fail, signed with the lawyer's per-lawyer key. Commits by hash to every artifact relied on — including any field evidence.</p>
+    ${gate.evidence ? `<div class="evidence">${icon("Camera", 14)} Field evidence from ${PROFILE.verifier.name} · ${gate.evidence.facts} · ${gate.evidence.photos} photos <span class="sigmini">sig ${gate.evidence.sig.slice(0, 12)}…</span></div>` : ""}
+    <button class="primary" data-act="attest" ${state.busy ? "disabled" : ""}>${state.busy ? `${icon("Loader2", 15, "spin")} Signing attestation…` : `${icon("Fingerprint", 15)} Sign PASS attestation`}</button>
+  </div>` : "";
+
+  const signed = d.gates.filter((g) => g.attestation);
+  const signedCard = signed.length ? `<div class="card">
+    <div class="ctitle small">Signed attestations</div>
+    ${signed.map((g) => `<button class="attrow" data-act="payload" data-arg="${g.id}">${icon("CheckCircle2", 14, "okico")} <b>${g.id}</b> PASS<span class="attsig">${g.attestation.signature.slice(0, 18)}…</span><span class="viewp">payload ${icon("ChevronRight", 12)}</span></button>`).join("")}
+  </div>` : "";
+
+  return `<div class="view">
+    <h2 class="vtitle">Law firm — designated verifier</h2>
+    <p class="vlede small">The firm runs three legal workstreams across the deal${offplan ? ", with construction-milestone gates verified in between" : ""}. Each tranche release additionally requires a cryptographic gate attestation, signed below.</p>
+    <div class="card matter">
+      <div class="ctitle small">Legal matter · Unit ${d.unitId} · ${offplan ? "Off-plan" : "Completed"}</div>
+      ${prongsHTML}
+    </div>
+    ${attestCard}
+    ${signedCard}
+  </div>`;
+}
+
+function bankHTML() {
+  const d = state.deal;
+  if (!d) return `<div class="view">${emptyHTML("Landmark", "No escrow yet. The bank holds funds once a deal is funded at G1.")}</div>`;
+  const u = curUnit(), gate = curGate(), pct = releasedPct();
+  const idx = gate ? d.gates.indexOf(gate) : -1;
+  const escrowHeld = Math.round(u.ghs * (100 - pct) / 100);
+  const releaseCard = gate && gate.status === "awaiting_bank" ? `<div class="card">
+    <div class="ctitle">Release instruction · ${gate.id} · ${PROFILE.tranches[idx]}%</div>
+    <p class="vlede small">The bank verifies <b>both</b> signatures independently — it does not take the platform's word. Funds move only when the law-firm attestation and the platform countersignature both check out and the schedule allows.</p>
+    <div class="sigrows">
+      <div class="sigrow">${icon("Scale", 14)} Law-firm attestation <span class="sigval">${gate.attestation.signature.slice(0, 16)}…</span>${icon("CheckCircle2", 14, "okico")}</div>
+      <div class="sigrow">${icon("Building2", 14)} Platform countersignature <span class="sigval">${simSig({ g: gate.id }, "platform").slice(0, 16)}…</span>${icon("CheckCircle2", 14, "okico")}</div>
+      <div class="sigrow">${icon("Hash", 14)} Cumulative schedule check <span class="sigval">${pct}% → ${pct + PROFILE.tranches[idx]}% ≤ 100</span>${icon("CheckCircle2", 14, "okico")}</div>
+    </div>
+    <button class="primary" data-act="release" ${state.busy ? "disabled" : ""}>${state.busy ? `${icon("Loader2", 15, "spin")} Verifying &amp; releasing…` : `Verify signatures &amp; release ${ghs(Math.round(u.ghs * PROFILE.tranches[idx] / 100))}`}</button>
+  </div>` : `<div class="view">${emptyHTML("Landmark", "No release pending. A release appears only after the law firm signs and the engine accepts the attestation.")}</div>`;
+  const confirmed = d.gates.filter((g) => g.confirmation);
+  const confCard = confirmed.length ? `<div class="card"><div class="ctitle small">Bank confirmations posted to ledger</div>
+    ${confirmed.map((g) => `<div class="attrow">${icon("Landmark", 14, "okico")} <b>${g.id}</b> ${ghs(g.confirmation.amt)} <span class="attsig">ref ${g.confirmation.ref}</span></div>`).join("")}
+  </div>` : "";
+  return `<div class="view">
+    <h2 class="vtitle">Partner bank — escrow custodian</h2>
+    <div class="bankstats">
+      <div class="bstat">${icon("Coins", 15)}<div><em>Held in escrow</em><b>${ghs(escrowHeld)}</b></div></div>
+      <div class="bstat">${icon("ArrowRight", 15)}<div><em>Released to seller</em><b>${ghs(u.ghs - escrowHeld)}</b></div></div>
+    </div>
+    ${releaseCard}
+    ${confCard}
+  </div>`;
+}
+
+function verifierHTML() {
+  const d = state.deal, gate = curGate();
+  const active = d && gate && gate.status === "awaiting_evidence";
+  if (!active) return `<div class="view">${emptyHTML("HardHat", "No assignment open. Field evidence is requested for off-plan construction milestones only.")}</div>`;
+  const facts = gate.id === "G2" ? "Substructure complete" : gate.id === "G3" ? "Superstructure to roof level" : "Finishes complete · snagging cleared";
+  return `<div class="view">
+    <h2 class="vtitle">Field verifier — evidentiary</h2>
+    <p class="vlede">You produce <b>evidence</b>, never a gate pass. Your signed report feeds the law firm's attestation. (Buyer sees only your first name, photo &amp; rating — the Uber pattern.)</p>
+    <div class="card">
+      <div class="ctitle">Assignment · ${gate.id} · ${gate.label}</div>
+      <div class="capgrid">
+        <div class="cap">${icon("Camera", 14)} Selfie-at-site</div>
+        <div class="cap">${icon("MapPin", 14)} GPS-matched photos ×4</div>
+        <div class="cap">${icon("FileText", 14)} Boundary / progress trace</div>
+        <div class="cap">${icon("Hash", 14)} EXIF live-capture check</div>
+      </div>
+      <div class="facts"><span>Structured facts</span><b>${facts}</b></div>
+      <button class="primary" data-act="evidence" ${state.busy ? "disabled" : ""}>${state.busy ? `${icon("Loader2", 15, "spin")} Signing &amp; uploading…` : `${icon("Fingerprint", 15)} Submit signed evidence`}</button>
+    </div>
+  </div>`;
+}
+
+function payloadModalHTML(data) {
+  return `<div class="modalwrap">
+    <div class="modal">
+      <div class="mhead">${icon("Fingerprint", 14)} Attestation payload · ${data.gate_id}<button class="mx" data-act="closepayload">×</button></div>
+      <pre class="payload">${JSON.stringify(data, null, 2)}</pre>
+      <div class="mfoot">Ed25519 over canonical JSON · simulated for demo</div>
+    </div>
+  </div>`;
+}
+
+/* ───────────── fail / cure one-pager ───────────── */
+function failCureBriefHTML() {
+  const unit = UNITS.find((u) => u.type === "off_plan");
+  const g2pct = PROFILE.tranches[1];
+  const g2amt = Math.round(unit.ghs * g2pct / 100);
+  const escrowHeld = Math.round(unit.ghs * (100 - PROFILE.tranches[0]) / 100);
+
+  const chainFrom = (prev, startSeq, rows) => {
+    let p = prev, s = startSeq; const out = [];
+    for (const r of rows) {
+      s += 1;
+      const hash = simHash(p + `${s}|${r.type}|${r.actor}|${r.gate || ""}|${r.detail}`);
+      p = hash; out.push(Object.assign({}, r, { seq: s, hash }));
+    }
+    return { out, prev: p, seq: s };
+  };
+  const shared = chainFrom("sha256:GENESIS00000000", 10, [
+    { actor: "verifier", gate: "G2", type: "platform_field_evidence_submitted", detail: "Signed site evidence · substructure: INCOMPLETE" },
+    { actor: "platform", gate: "G2", type: "discrepancy_substantive", detail: "Field evidence conflicts with the claimed foundation milestone" },
+    { actor: "lawfirm", gate: "G2", type: "attestation_received", detail: "Signed FAIL · binary decision · no tranche released", fail: true },
+    { actor: "platform", gate: "G2", type: "cure_opened", detail: "Cure window opened · SLA clock started · escrow position unchanged" },
+    { actor: "platform", gate: "G2", type: "m5_escalation", detail: "Delay surfaced on the buyer's M5 public timeline" },
+  ]);
+  const cured = chainFrom(shared.prev, shared.seq, [
+    { actor: "verifier", gate: "G2", type: "platform_field_evidence_submitted", detail: "Re-verification · substructure: complete" },
+    { actor: "lawfirm", gate: "G2", type: "attestation_received", detail: "Signed PASS · field evidence committed by hash" },
+    { actor: "bank", gate: "G2", type: "bank_confirmation", detail: "Cure resolved · " + ghs(g2amt) + " released → seller" },
+  ]).out;
+  const aborted = chainFrom(shared.prev, shared.seq, [
+    { actor: "platform", gate: "G2", type: "abort_triggered", detail: "Cure window expired · deal aborted under the SPA", abort: true },
+    { actor: "bank", gate: "G2", type: "refund_executed", detail: "Refund waterfall · " + ghs(escrowHeld) + " returned to buyer", abort: true },
+  ]).out;
+
+  const steps = [
+    { kind: "step", ic: "Building2", title: "Gate G2 reached", tag: "milestone", tagcls: "",
+      text: "The off-plan deal arrives at the foundation milestone. The next " + g2pct + "% tranche (" + ghs(g2amt) + ") is pending — but nothing is released yet." },
+    { kind: "step", ic: "Camera", title: "Field verification", tag: "evidence", tagcls: "",
+      text: PROFILE.verifier.name + " visits the site and captures GPS-matched, timestamped photos, signed on capture. The verifier produces evidence — never a gate pass." },
+    { kind: "fail", ic: "AlertTriangle", title: "Discrepancy → signed FAIL", tag: "fail", tagcls: "fail",
+      text: "The evidence shows the substructure is incomplete, contradicting the developer's claim. The law firm cannot attest a pass, so it signs a FAIL with its per-lawyer key. The fail is itself committed to the ledger, and the gate is blocked." },
+    { kind: "cure", ic: "RotateCcw", title: "Cure window opens", tag: "cure", tagcls: "cure",
+      text: "The " + g2pct + "% stays in segregated escrow — no money moves on a fail. A cure window opens with an SLA clock, the developer is notified of the specific defect, and the M5 timeline shows the delay to the buyer instead of hiding it." },
+    { kind: "step", ic: "Eye", title: "Re-verification", tag: "evidence", tagcls: "",
+      text: "When the developer reports the work remedied, a fresh field verification re-runs the same gate with new signed evidence. The decision is binary, every time." },
+  ];
+  const stepsHTML = steps.map((s) => `<li class="opstep is-${s.kind}">
+    <span class="opdot">${icon(s.ic, 17)}</span>
+    <div class="opsbody">
+      <div class="opshead"><b>${s.title}</b>${s.tag ? `<span class="optag ${s.tagcls}">${s.tag}</span>` : ""}</div>
+      <div class="optext">${s.text}</div>
+    </div>
+  </li>`).join("");
+
+  return `<div class="onepager">
+    <div class="op-hero">
+      <div class="op-kicker">Trust mechanism · failure handling</div>
+      <h1 class="op-title">What happens when a gate fails</h1>
+      <p class="op-sub">A failed check never moves money. It is signed, surfaced, and resolved in the open — the deal either cures and continues, or aborts to a full refund. There is no silent third path, and the audit record never shows a gap.</p>
+      <div class="op-scenario">
+        <span>Worked example</span>
+        Off-plan unit ${unit.id} · Gate G2 — Foundation Complete · ${ghs(unit.ghs)} · <em>the field verifier's site evidence contradicts the developer's milestone claim.</em>
+      </div>
+    </div>
+
+    <div class="op-h"><span class="ophn">1</span> The path, step by step</div>
+    <ul class="opflow">${stepsHTML}</ul>
+
+    <div class="opfork"><span class="opforkq">${icon("Hash", 13)} Remedied within the cure window?</span></div>
+    <div class="opout">
+      <div class="opcard good">
+        <h4>${icon("CheckCircle2", 16)} Yes — cured, then released</h4>
+        <p>The law firm signs a PASS. The bank independently verifies both signatures and the schedule, then releases the ${g2pct}% tranche (${ghs(g2amt)}) to the seller. The deal continues to G3, with the fail-and-cure permanently in its history.</p>
+      </div>
+      <div class="opcard bad">
+        <h4>${icon("AlertTriangle", 16)} No — aborted, then refunded</h4>
+        <p>The deal aborts under the SPA's terms. The escrow refund waterfall returns the buyer's held balance (${ghs(escrowHeld)}), less any contractually agreed costs. The matter closes with the full signed record intact.</p>
+      </div>
+    </div>
+
+    <div class="op-h"><span class="ophn">2</span> Why the buyer is safe through all of this</div>
+    <div class="opguard">
+      <div class="gcard"><span class="gi">${icon("Lock", 16)}</span><h4>A fail never moves money</h4><p>Money moves only on a signed PASS plus an independent bank release. A fail leaves every held tranche exactly where it sits in escrow.</p></div>
+      <div class="gcard"><span class="gi">${icon("Fingerprint", 16)}</span><h4>The fail is signed too</h4><p>A negative result is attested with the same key as a pass and committed to the hash-chained ledger. There is no silent decline — the record can never show a gap where a decision should be.</p></div>
+      <div class="gcard"><span class="gi">${icon("ShieldCheck", 16)}</span><h4>Cure or abort — never limbo</h4><p>Once a fail is recorded the deal has exactly two terminal paths: remedied-and-released, or aborted-and-refunded. No off-ledger side arrangements.</p></div>
+    </div>
+
+    <div class="op-h"><span class="ophn">3</span> The same trail, as the ledger records it</div>
+    <p class="op-note">Every step above writes an append-only, hash-chained event. Here is the exact sequence for the worked example — the shared path into the fail, then each of the two ways it can end.</p>
+    <div class="opledger">
+      ${shared.out.map(lrowHTML).join("")}
+      <div class="opl-fork">
+        <div class="opcol">
+          <div class="opcolhead good">${icon("CheckCircle2", 13)} If remedied in time</div>
+          ${cured.map(lrowHTML).join("")}
+        </div>
+        <div class="opcol">
+          <div class="opcolhead bad">${icon("AlertTriangle", 13)} If the window lapses</div>
+          ${aborted.map(lrowHTML).join("")}
+        </div>
+      </div>
+    </div>
+
+    <div class="op-h"><span class="ophn">4</span> The same machinery covers the other failure points</div>
+    <div class="opalso">
+      <div class="a"><b>Project verification fails at selection</b>The first buyer's selection triggers title and permit verification. If it fails, the listing is suspended before any escrow is funded — the buyer never reaches G1, and no money was ever at risk.</div>
+      <div class="a"><b>Verifier and law firm disagree</b>If the field verifier's evidence and the law firm's own stream conflict, that discrepancy is itself a substantive event — it enters the identical cure-or-abort loop rather than being quietly reconciled.</div>
+    </div>
+
+    <div class="op-foot">${icon("Fingerprint", 12)} Signatures &amp; hashes simulated for demo · profile: Ghana · ${PROFILE.registry}</div>
+  </div>`;
+}
+
+/* ───────────── render ───────────── */
+function stageHTML() {
+  switch (state.role) {
+    case "developer": return developerHTML();
+    case "buyer": return buyerHTML();
+    case "lawfirm": return lawfirmHTML();
+    case "bank": return bankHTML();
+    case "verifier": return verifierHTML();
+    default: return "";
+  }
+}
+
+function render() {
+  const step = nextStep();
+  const coach = step
+    ? `<button class="coachbtn" data-act="role" data-arg="${step.role}">
+        <span class="coachlabel">Next</span>${icon("ChevronRight", 14)}
+        <b>${ROLES.find((r) => r.id === step.role).label}</b>
+        <span class="coachtext">${step.text}</span>${icon("ArrowRight", 14, "go")}
+      </button>`
+    : `<div class="coachbtn done">${icon("CheckCircle2", 15)} Deal complete — every tranche released against a signed attestation and an independent bank confirmation.</div>`;
+
+  const tabs = ROLES.map((r) => `<button class="tab${state.role === r.id ? " active" : ""}" data-act="role" data-arg="${r.id}">
+      ${icon(r.icon, 16)}<span class="tl">${r.label}<em>${r.sub}</em></span>
+      ${step && step.role === r.id ? `<span class="ping"></span>` : ""}
+    </button>`).join("");
+
+  const ledgerEvents = state.ledger.length === 0
+    ? `<div class="lempty">Events appear here, hash-chained, as the deal progresses.</div>`
+    : state.ledger.slice().reverse().map(lrowHTML).join("");
+
+  const demo = `
+    <div class="coach">${coach}<span class="simnote">${icon("Fingerprint", 12)} Signatures &amp; hashes simulated for demo</span></div>
+    <nav class="tabs">${tabs}</nav>
+    <div class="body">
+      <main class="stage">${stageHTML()}</main>
+      <aside class="ledger">
+        <div class="lhead">${icon("Hash", 13)} Append-only Audit Ledger <span class="lcount">${state.ledger.length}</span></div>
+        <div class="levents">${ledgerEvents}</div>
+      </aside>
+    </div>
+    ${state.payloadOpen ? payloadModalHTML(state.payloadOpen) : ""}`;
+
+  const body = `
+    <header class="bar">
+      <img class="logo-img" src="${LOGO}" alt="Nestadia"/>
+      <span class="tag">Property Trust Platform</span>
+      <div class="profilechip">
+        <span class="dot ok"></span> Profile <b>Ghana</b> · ${PROFILE.city} · ${PROFILE.currency} · ${PROFILE.tenure_cap}-yr tenure
+        <span class="muted2"> · Lagos / Nairobi = config only</span>
+      </div>
+      <button class="reset" data-act="reset">${icon("RotateCcw", 13)} Reset</button>
+    </header>
+    <div class="modebar">
+      <div class="seg">
+        <button class="segbtn${state.view === "demo" ? " on" : ""}" data-act="view" data-arg="demo">${icon("Building2", 13)} Live demo</button>
+        <button class="segbtn${state.view === "brief" ? " on" : ""}" data-act="view" data-arg="brief">${icon("ShieldCheck", 13)} Fail &amp; cure brief</button>
+      </div>
+      <span class="modehint">${state.view === "demo" ? "Interactive walkthrough of one clean deal, end to end" : "What happens when a check fails — a one-pager for partners"}</span>
+    </div>
+    ${state.view === "demo" ? demo : failCureBriefHTML()}`;
+
+  document.getElementById("root").innerHTML = `<div class="nest">${body}</div>`;
+}
+
+/* ───────────── boot ───────────── */
+(function boot() {
+  const st = document.createElement("style");
+  st.textContent = CSS;
+  document.head.appendChild(st);
+
+  document.getElementById("root").addEventListener("click", function (ev) {
+    if (ev.target && ev.target.classList && ev.target.classList.contains("modalwrap")) { state.payloadOpen = null; render(); return; }
+    const el = ev.target.closest ? ev.target.closest("[data-act]") : null;
+    if (!el) return;
+    const act = el.getAttribute("data-act");
+    const arg = el.getAttribute("data-arg");
+    if (act === "role") setRole(arg);
+    else if (act === "view") setView(arg);
+    else if (act === "reset") reset();
+    else if (act === "list") listDevelopment();
+    else if (act === "select") selectUnit(arg);
+    else if (act === "verify") runProjectVerification();
+    else if (act === "spa") draftSPA();
+    else if (act === "fund") buyerFund();
+    else if (act === "evidence") submitEvidence();
+    else if (act === "attest") attest();
+    else if (act === "release") bankRelease();
+    else if (act === "payload") openPayload(arg);
+    else if (act === "closepayload") { state.payloadOpen = null; render(); }
+  });
+
+  render();
+})();
+
+</script>
+</body>
+</html>
